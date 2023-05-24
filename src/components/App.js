@@ -37,6 +37,7 @@ function App() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    if (!loggedIn) return;
     api.getInitialCards()
       .then((data) => {
         setCards(data);
@@ -44,9 +45,10 @@ function App() {
       .catch(err => {
         console.log(err);
       })
-  }, []);
+  }, [loggedIn]);
 
   React.useEffect(() => {
+    if (!loggedIn) return;
     api.getUserData()
       .then((data) => {
         setCurrentUser(data);
@@ -54,7 +56,7 @@ function App() {
       .catch(err => {
         console.log(err);
       })
-  }, []);
+  }, [loggedIn]);
 
   React.useEffect(() => {
     const token = localStorage.getItem('token');
